@@ -15,6 +15,7 @@ class _LocationScreenState extends State<LocationScreen> {
   int condition;
   String cityName;
 
+  /// Update the UI information based on [weatherData] given from a web API
   void updatedUI(dynamic weatherData) {
     double temp = weatherData['main']['temp'];
     temperature = temp.toInt();

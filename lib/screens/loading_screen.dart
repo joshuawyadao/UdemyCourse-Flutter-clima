@@ -13,6 +13,7 @@ class LoadingScreen extends StatefulWidget {
 }
 
 class _LoadingScreenState extends State<LoadingScreen> {
+  /// Retrieve data from the openweathermap API
   void getLocationData() async {
     Location location = Location();
     await location.getCurrentLocation();

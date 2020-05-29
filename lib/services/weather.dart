@@ -1,4 +1,5 @@
 class WeatherModel {
+  /// Return a weather icon based on the [condition]
   String getWeatherIcon(int condition) {
     if (condition < 300) {
       return '🌩';
@@ -19,12 +20,13 @@ class WeatherModel {
     }
   }
 
+  /// Return a String message based on the [temp] in Fahrenheit
   String getMessage(int temp) {
-    if (temp > 25) {
+    if (temp > 77) {
       return 'It\'s 🍦 time';
-    } else if (temp > 20) {
+    } else if (temp > 68) {
       return 'Time for shorts and 👕';
-    } else if (temp < 10) {
+    } else if (temp < 50) {
       return 'You\'ll need 🧣 and 🧤';
     } else {
       return 'Bring a 🧥 just in case';
