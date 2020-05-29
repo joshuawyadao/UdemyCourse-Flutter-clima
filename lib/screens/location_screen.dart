@@ -13,7 +13,7 @@ class LocationScreen extends StatefulWidget {
 }
 
 class _LocationScreenState extends State<LocationScreen> {
-  WeatherModel weatherModel = WeatherModel();
+  WeatherModel weather = WeatherModel();
   int temperature;
   String weatherIcon;
   String weatherMessage;
@@ -21,13 +21,15 @@ class _LocationScreenState extends State<LocationScreen> {
 
   /// Update the UI information based on [weatherData] given from a web API
   void updatedUI(dynamic weatherData) {
-    double temp = weatherData['main']['temp'];
-    temperature = temp.toInt();
-    var condition = weatherData['weather'][0]['id'];
-    cityName = weatherData['name'];
+    setState(() {
+      double temp = weatherData['main']['temp'];
+      temperature = temp.toInt();
+      var condition = weatherData['weather'][0]['id'];
 
-    weatherIcon = weatherModel.getWeatherIcon(condition);
-    weatherMessage = weatherModel.getMessage(temperature);
+      cityName = weatherData['name'];
+      weatherIcon = weather.getWeatherIcon(condition);
+      weatherMessage = weather.getMessage(temperature);
+    });
   }
 
   @override
@@ -59,7 +61,10 @@ class _LocationScreenState extends State<LocationScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   FlatButton(
-                    onPressed: () {},
+                    onPressed: () async {
+                      var weatherData = await weather.getLocationWeather();
+                      updatedUI(weatherData);
+                    },
                     child: Icon(
                       Icons.near_me,
                       size: 50.0,
@@ -92,7 +97,7 @@ class _LocationScreenState extends State<LocationScreen> {
               Padding(
                 padding: EdgeInsets.only(right: 15.0),
                 child: Text(
-                  "$weatherMessage in $cityName",
+                  '$weatherMessage in $cityName! ',
                   textAlign: TextAlign.right,
                   style: kMessageTextStyle,
                 ),
