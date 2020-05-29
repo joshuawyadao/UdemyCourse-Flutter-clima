@@ -12,9 +12,7 @@ class WeatherModel {
 
     NetworkHelper networkHelper = NetworkHelper(
         url:
-            '$openWeatherMapURL?lat=51.5&lon=-0.2&appid=$apiKey&units=imperial');
-
-    // $openWeatherMapURL?lat=${location.latitude}&lon=${location.longitude}&appid=$apiKey&units=imperial'
+            '$openWeatherMapURL?lat=${location.latitude}&lon=${location.longitude}&appid=$apiKey&units=imperial');
 
     var weatherData = await networkHelper.getData();
 
